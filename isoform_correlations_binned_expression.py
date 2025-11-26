@@ -1,17 +1,16 @@
 #! /usr/bin/env python
 
 # make confidence interval around the mean of the data
-
-import pandas as pd
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-from functools import reduce
-import plotly.colors as pc
 import argparse
 import warnings
 import numpy as np
 import seaborn as sns
+import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import plotly.colors as pc
+from functools import reduce
 from multiprocessing import Pool, cpu_count
 warnings.simplefilter(action='ignore')
 
