@@ -4,16 +4,16 @@ import pysam
 import pandas as pd
 import numpy as np
 import scipy
-import matplotlib.pyplot as plt
+import re
 import seaborn as sns
 from Bio import SeqIO
-import re
 from collections import Counter
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 import matplotlib.path as mpath
 import matplotlib.patches as mpatches
-from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
-import matplotlib as mpl
 from matplotlib.patches import Rectangle
+from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 
 def get_reads(sam, contig, start, stop, strand):
     '''Get reads in a certain region from a BAM file.'''
@@ -145,7 +145,7 @@ def get_splice_data(row):
 
 def structure_abundance(df, normalize=False):
     '''Return the frequency (fractional or count) of the transcript structure (start, splices, stop).'''
-    value_count = None
+    value_count = pd.DataFrame()
 
     if normalize:
         value_count = df.groupby(['contig', 'region_start', 'region_stop', 'strand', 'internal_splice_juncs']).internal_splice_juncs.agg(lambda x: x.count().div(len(x)))
