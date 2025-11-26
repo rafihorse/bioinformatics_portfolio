@@ -1,15 +1,14 @@
 #!/usr/bin/env python
-
 import pandas as pd
 import argparse
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from functools import reduce
 import plotly.graph_objects as go
 import matplotlib.colors as mcolors
-from concurrent.futures import ProcessPoolExecutor
 import functools
+from functools import reduce
+from concurrent.futures import ProcessPoolExecutor
 
 # Define the theme for Plotly figures
 theme = 'plotly_white'
