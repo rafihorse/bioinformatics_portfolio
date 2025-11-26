@@ -39,34 +39,30 @@ def get_reads(sam, contig, start, stop, strand):
 
     reads = sam.fetch(contig, start, stop)
 
-    try:
-        for i, read in enumerate(reads):
-            if (read.is_reverse and strand == '+') or (read.is_forward and strand == '-') or (read.is_secondary):
-                pass
-            else:
-                data['contig'].append(contig)
-                data['region_start'].append(start),
-                data['region_stop'].append(stop),
-                data['region_len'].append(stop-start),
-                data['strand'].append(strand),
-                data['read_number'].append(i),
-                data['read_name'].append(read.query_name),
-                data['read_start'].append(read.reference_start),
-                data['read_stop'].append(read.reference_end),
-                data['read_aln_len'].append(read.reference_length),
-                data['read_len_frac'].append(read.reference_length / (stop - start)),
-                data['read_query_len'].append(read.infer_query_length()),
-                data['read_query_overlap'].append(read.get_overlap(start, stop)),
-                data['cigar_tuples'].append(read.cigartuples),
-                data['read_seq'].append(read.get_forward_sequence()),
-                data['read_mapq'].append(read.mapping_quality)
+    for i, read in enumerate(reads):
+        if (read.is_reverse and strand == '+') or (read.is_forward and strand == '-') or (read.is_secondary):
+            pass
+        else:
+            data['contig'].append(contig)
+            data['region_start'].append(start),
+            data['region_stop'].append(stop),
+            data['region_len'].append(stop-start),
+            data['strand'].append(strand),
+            data['read_number'].append(i),
+            data['read_name'].append(read.query_name),
+            data['read_start'].append(read.reference_start),
+            data['read_stop'].append(read.reference_end),
+            data['read_aln_len'].append(read.reference_length),
+            data['read_len_frac'].append(read.reference_length / (stop - start)),
+            data['read_query_len'].append(read.infer_query_length()),
+            data['read_query_overlap'].append(read.get_overlap(start, stop)),
+            data['cigar_tuples'].append(read.cigartuples),
+            data['read_seq'].append(read.get_forward_sequence()),
+            data['read_mapq'].append(read.mapping_quality)
 
-            
-        df = pd.DataFrame(data)
-        return df
-
-    except:
-        raise
+        
+    df = pd.DataFrame(data)
+    return df
 
 def filter_by_coverage(df, num):
     '''Filter regions in a BAM file by minimum number of reads mapped to that region (not necessarily overlapping).'''
